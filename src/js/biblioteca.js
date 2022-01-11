@@ -1,13 +1,13 @@
 /**
-	clase.js Clase de negocio que representa un objeto.
+	clase.js Clase de negocio que representa un libro.
 	@author Miguel Jaque <mjaque@migueljaque.com>
 	@license GPL-3.0-or-later
 */
 
 /**
-	Clase de negocio que representa un objeto.
+	Clase de negocio que representa un libro.
 */
-export class Clase{
+export class Biblioteca{
 	//Atributos estáticos
 	static ESTADO = {
 		Estado1: Symbol(),
@@ -17,7 +17,7 @@ export class Clase{
 	
 	//Atributos Dinámicos
 	//Encapsulamos los atributos como privados.
-	#id	//Identificador único del objeto
+	#id	//Identificador único del libro
 	#nombre
 	#descripcion
 	#fecha
@@ -27,7 +27,7 @@ export class Clase{
 
 	/**
 		Constructor de la clase.
-		@param nombre {String} Nombre del objeto.
+		@param nombre {String} Nombre del libro.
 	**/
 	constructor(nombre){
 		this.nombre = nombre

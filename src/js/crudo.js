@@ -16,7 +16,7 @@ import {VistaCrear} from './vistacrear.js'
 class Crudo{
 	/**
 		Constructor del controlador.
-		Instancia e inicializa los atributos del objeto.
+		Instancia e inicializa los atributos del libro.
 		Captura el evento window.onload para iniciar la aplicación.
 	*/
 	constructor(){
@@ -62,11 +62,11 @@ class Crudo{
 		this.vistaPrincipal.verCrear()	
 	}
 	/**
-	Atención al botón Aceptar de VistaCrear. Crea el nuevo objeto
-	@param objeto {Clase} Objeto a crear.
+	Atención al botón Aceptar de VistaCrear. Crea el nuevo libro
+	@param libro {Clase} libro a crear.
 	*/
-	aceptarCrear(objeto){
-		this.modelo.insertar(objeto, this.listar.bind(this))
+	aceptarCrear(libro){
+		this.modelo.insertar(libro, this.listar.bind(this))
 	}
 }
 

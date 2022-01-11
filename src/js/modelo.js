@@ -12,7 +12,7 @@
 export class Modelo{
 	//Atributos
 	#bd	//Conexión con la base de datos
-	#OS1 = 'Objeto'	//ObjectStore (como la "tabla")
+	#OS1 = 'Libro'	//ObjectStore (como la "tabla")
 
 	/**
 		Constructor de Modelo
@@ -50,7 +50,7 @@ export class Modelo{
 		this.bd = evento.target.result;
 		console.log('Actualizando la base de datos...')
 		console.log(`Creando el ObjectStore de "${this.#OS1}"...`)
-		// Crea un almacén de objetos (objectStore) para esta base de datos
+		// Crea un almacén de libros (objectStore) para esta base de datos
 		let os1 = this.bd.createObjectStore(this.#OS1, { autoIncrement : true })
 		//var objectStore = this.bd.createObjectStore("name", { keyPath: "myKey" });
 		
@@ -78,12 +78,12 @@ export class Modelo{
 		let transaccion = this.bd.transaction(this.#OS1, tipo)
 		return transaccion.objectStore(this.#OS1)	//OS para la transacción
 	}
-	/**	Inserta un objeto en la base de datos
-		@param {Clase} objeto - objeto a insertar.
+	/**	Inserta un libro en la base de datos
+		@param {Clase} libro - libro a insertar.
 		@param {Function} callback - Función de callback que se llamará al completar la operación.
 	**/
-	insertar(objeto, callback){
-		let peticion = this.getTransaccionOS('readwrite').add(objeto)
+	insertar(libro, callback){
+		let peticion = this.getTransaccionOS('readwrite').add(libro)
 		peticion.onsuccess = callback
 	}
 }
