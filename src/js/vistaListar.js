@@ -50,6 +50,14 @@ export class VistaListar extends Vista{
 	asociar(){
 		
 	}
-	
+	mostrar(mostrar){
+		if(mostrar){
+      		$(this.html.div).show()
+			/*this.html.div.style.display='block'*/
+		}else{
+			$(this.html.div).hide()
+			/*/this.html.div.style.display='none'*/
+		}
+	}
 	
 }
