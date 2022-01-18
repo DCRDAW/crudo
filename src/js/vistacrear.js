@@ -43,9 +43,10 @@ export class VistaCrear extends Vista{
 		console.log( this.html.div = docPlantilla.getElementsByTagName('div')[0])
 		this.html.iNombre = docPlantilla.getElementsByTagName('input')[0]
 		this.html.btnAceptar = docPlantilla.getElementsByTagName('button')[0]
+	
 	}
 	/**
-	Asocia los manejadores de eventos a los eventos del documento.
+	Asocia los manejadores de eventos a los eventos del documento
 	**/
 	asociar(){
 		this.html.btnAceptar.onclick = this.aceptar.bind(this)
