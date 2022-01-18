@@ -12,7 +12,7 @@
 import {Vista} from './vista.js'
 import {Menu} from './menu.js'
 import {VistaCrear} from './vistacrear.js'
-
+import {VistaListar} from './vistaListar.js'
 export class VistaPrincipal extends Vista{
 	/**
 		Constructor de la vista principal.
@@ -56,21 +56,35 @@ export class VistaPrincipal extends Vista{
 		//Subvistas. No se cargan hasta tener registradas las referencias a la plantilla.
 		this.hijos = {
 			'menu' : new Menu(this.controlador, this.html.nav),
-			'vistaCrear': new VistaCrear(this.controlador, this.html.main)
+			'vistaCrear': new VistaCrear(this.controlador, this.html.main),
+			'vistaListar': new VistaListar(this.controlador, this.html.main)
 		}
 	}
+	
 	/**
 	Muestra el formulario para dar de alta un nuevo Objetivo.
 	*/
 	verCrear(){
 		this.ocultarSubvistasMain()
-		this.hijos.crear.mostrar()
+		this.hijos.vistaCrear.mostrar(true)
+	}
+	/**
+	 * Muestra la lista de libros
+	 */
+	verListar(){
+		this.ocultarSubvistasMain()
+		this.hijos.vistaListar.mostrar(true)
 	}
 	/**
 	Oculta las subvistas de main
 	*/
 	ocultarSubvistasMain(){
 		//Añadir el resto de subvistas de main
-		this.hijos.vistaCrear.ocultar()
+		//this.hijos.vistaCrear.ocultar()
+		this.hijos.vistaCrear.mostrar(false)
+		this.hijos.vistaListar.mostrar(false)
+
 	}
+
+	
 }

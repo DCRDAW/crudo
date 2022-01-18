@@ -32,31 +32,34 @@ export class Vista {
   	@param base {HTMLElement) Elemento HTML del documento principal en el que se cargarán los elementos de la plantilla de la vista.
   	@return {Promise}
   */
-  cargar(plantilla, base = this.base) {
-    if (!plantilla) //nombre por defecto
-      plantilla = `${this.dirHTML}/${this.constructor.name.toLowerCase()}.html`
-    return new Promise(resolve => {
-      fetch(plantilla)
-        .then(respuesta => {
-          respuesta.text().then(texto => {
-              const parser = new DOMParser()
-              let doc = parser.parseFromString(texto, "text/html")
-              this.registrar(doc)
-              this.asociar()
-              this.transferir(base, doc.body)	//De lo contrario, cargamos todo el doc (con html, head, body...)
-              this.cargarCSS(`${this.dirCSS}/${this.constructor.name.toLowerCase()}.css`)
-              this.crearHijos()
-							const promesas = [] //Creamos un array de promesas
-              for (let hijo in this.hijos)
-                promesas.push(this.hijos[hijo].cargar())
-              Promise.all(promesas).then(resolve(true))
-            })
-        })
-        .catch(error => {
-          throw error
-        })
-    })
-  }
+    cargar(plantilla, base = this.base) {
+      if (!plantilla) //nombre por defecto
+        plantilla = `${this.dirHTML}/${this.constructor.name.toLowerCase()}.html`
+      return new Promise(resolve => {
+        fetch(plantilla)
+          .then(respuesta => {
+            respuesta.text().then(texto => {
+                const parser = new DOMParser()
+                let doc = parser.parseFromString(texto, "text/html")
+                this.registrar(doc)
+                this.asociar()
+                this.transferir(base, doc.body)	//De lo contrario, cargamos todo el doc (con html, head, body...)
+                this.cargarCSS(`${this.dirCSS}/${this.constructor.name.toLowerCase()}.css`)
+                this.crearHijos()
+                const promesas = [] //Creamos un array de promesas
+                for (let hijo in this.hijos)
+                  promesas.push(this.hijos[hijo].cargar())
+                return Promise.all(promesas).then(() => {
+          console.log(`Cargado ${this.constructor.name.toLowerCase()}`)
+          resolve(true)
+          })
+      })
+         })
+          .catch(error => {
+            throw error
+          })
+      })
+    }
   /**
   	Carga un fichero de CSS en la cabecera del documento.
   */
@@ -101,5 +104,18 @@ export class Vista {
 	*/
   crearHijos() {
 		//Este método debe ser sobreescrito por la clase derivada.
+	}
+  /**
+	 * Muestra o oculta la vista(hijos)
+	 * @param mostrar (Boolean) True para mostrar la vista, false para ocultarla
+	 */
+	mostrar(mostrar){
+		if(mostrar){
+      console.log(this.html.div);
+			this.html.div.style.display='block'
+		}else{
+      console.log(this.html);
+			this.html.div.style.display='none'
+		}
 	}
 }

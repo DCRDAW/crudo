@@ -9,6 +9,7 @@ import {Modelo} from './modelo.js'
 import {Vista} from './vista.js'
 import {VistaPrincipal} from './vistaprincipal.js'
 import {VistaCrear} from './vistacrear.js'
+import {VistaListar} from './vistaListar.js'
 
 /**
 	Controlador principal de la aplicación.
@@ -46,6 +47,7 @@ class Crudo{
 	*/
 	iniciar(){
 		console.log('crudo.iniciar')
+		this.vistaPrincipal.verCrear()
 	}
 
 	//Atención a Eventos
@@ -54,6 +56,7 @@ class Crudo{
 	*/
 	listar(){
 		console.log('crudo.listar')
+		this.vistaPrincipal.verListar()
 	}
 	/**
 		Atención a la opción de menú "verCrear"

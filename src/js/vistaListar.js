@@ -1,17 +1,17 @@
 /**
-	vistacrear.js Vista de Formulario para la creación de objetivos.
+	vistacrear.js Vista de Formulario para la visualización de objetivos.
 	@author Miguel Jaque <mjaque@migueljaque.com>
 	@license GPL-3.0-or-later
 */
 
 /**
-	Vista de Formulario para la creación de objetivos.
+	Vista de Formulario para la visualización de objetivos.
 */
 
 import {Vista} from './vista.js'
 import {Biblioteca} from './biblioteca.js'
 
-export class VistaCrear extends Vista{
+export class VistaListar extends Vista{
 	/**
 		Constructor de la vista.
 		Declara a inicializa los atributos del objeto.
@@ -23,9 +23,8 @@ export class VistaCrear extends Vista{
 
 		//Referencias a Elementos HTML en la plantilla
 		this.html = {
-			'div':null,
-			'iNombre' : null,
-			'btnAceptar' : null
+			'div' : null,
+			'tabla' : null
 		}
 
 		//Subvistas. No se cargan hasta tener registradas las referencias a la plantilla.
@@ -40,31 +39,17 @@ export class VistaCrear extends Vista{
 	*/
 	registrar(docPlantilla){
 		//Guardamos las referencias a los elementos del interfaz
-		console.log( this.html.div = docPlantilla.getElementsByTagName('div')[0])
-		this.html.iNombre = docPlantilla.getElementsByTagName('input')[0]
-		this.html.btnAceptar = docPlantilla.getElementsByTagName('button')[0]
+		
+		console.log(this.html.div = docPlantilla.getElementsByTagName('div')[0]);
+		console.log(this.html.tabla = docPlantilla.getElementsByTagName('table')[0]);
+		console.log(this.html.div);
 	}
 	/**
 	Asocia los manejadores de eventos a los eventos del documento.
 	**/
 	asociar(){
-		this.html.btnAceptar.onclick = this.aceptar.bind(this)
+		
 	}
-	/**
-	Atención al botón Aceptar
-	*/
-	aceptar(){
-		//Aquí se haría la validación de datos.
-		let nombre = this.html.iNombre.value
-		//Construimos el objeto de negocio
-		let libro = new Biblioteca(nombre)
-		this.controlador.aceptarCrear(libro)
-		this.limpiar()
-	}
-	/**
-		Borra los campos del formulario.
-	*/
-	limpiar(){
-		this.html.iNombre = ''
-	}
+	
+	
 }
